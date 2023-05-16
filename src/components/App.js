@@ -22,26 +22,6 @@ import { InfoTooltip } from "./InfoTooltip";
 import * as auth from "../utils/auth";
 
 function App() {
-
-  const navigate = useNavigate();
-
-  function tokenChech() {
-    const token = localStorage.getItem("token");
-    if (token) {
-      auth
-        .checkToken(token)
-        .then((user) => {
-          setLoggenIn(user);
-          // navigate('/main')
-        })
-        .catch();
-    }
-  }
-
-  React.useEffect(() => {
-    tokenChech()
-  }, [])
-
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([]);
 
@@ -90,11 +70,11 @@ function App() {
   
   function handelRegisterCheck() {
     setIsSuccess(true);
-    setIsRegistenDone(!isRegistenDone);
+    setIsRegistenDone(true);
   }
 
   function handelLoginCheck(){
-    setIsRegistenDone(!isRegistenDone);
+    setIsRegistenDone(true);
     setIsSuccess(false);
   }
 
@@ -185,16 +165,38 @@ function App() {
   const [loggenIn, setLoggenIn] = React.useState(false);
   const [emailData, setemailData] = React.useState('');
 
-  const handleLogin = () => {
+    function handleLogin () {
     setLoggenIn(true);
-    setemailData(loggenIn.data.email)
   };
+
+  function handleExit () {
+    localStorage.removeItem("token");
+    setLoggenIn(false);
+    navigate('/login')
+  }
+
+  const navigate = useNavigate();
+
+  React.useEffect(() => {
+    const token = localStorage.getItem("token");
+      auth
+        .checkToken(token)
+        .then((user) => {
+          handleLogin (user)
+          setLoggenIn(user);
+          navigate('/main')
+          setemailData(user.data.email)
+        })
+        .catch();
+  }, [])
+
+
 
   return (
     <div className="body">
       <div className="page">
         <CurrentUserContext.Provider value={currentUser}>
-          <Header loggenIn={loggenIn} emailData={emailData}/>
+          <Header emailData={emailData} handleExit={handleExit}/>
             <Routes>
               <Route
                 path="/register"

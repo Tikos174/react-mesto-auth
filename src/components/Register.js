@@ -19,8 +19,6 @@ function Register( {handelRegisterCheck} ) {
   const {email, password} = formValue
   const navigate = useNavigate()
 
-  console.log(navigate)
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
