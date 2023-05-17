@@ -1,37 +1,41 @@
-const URL = "https://auth.nomoreparties.co"
+const URL = "https://auth.nomoreparties.co";
 
-export function registerPost(email,  password){
-    return fetch(`${URL}/signup`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-    },
-    body: JSON.stringify({ email, password }),
-      })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
+export function checkResponse(res) {
+  if (res.ok) {
+    return res.json();
+  }
+  return Promise.reject(`Ошибка ${res.status}`);
 }
 
-export function authorizationPost(email,  password){
-    return fetch(`${URL}/signin`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
+export function registerPost(email, password) {
+  return fetch(`${URL}/signup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
     },
     body: JSON.stringify({ email, password }),
-      })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
+  }).then((res) => checkResponse(res));
 }
 
-export function checkToken(token){
-    return fetch(`${URL}/users/me`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-            "Authorization" : `Bearer ${token}`
+export function authorizationPost(email, password) {
+  return fetch(`${URL}/signin`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
     },
-      })
-      .then(res => res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`));
+    body: JSON.stringify({ email, password }),
+  }).then((res) => checkResponse(res));
+}
+
+export function checkToken(token) {
+  return fetch(`${URL}/users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then((res) => checkResponse(res));
 }

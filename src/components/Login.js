@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as auth from "../utils/auth";
 
-function Login( {handleLogin, handelLoginCheck} ) {
+function Login({ handleLogin, handelLoginCheck }) {
   const [formValue, setFormValue] = useState({
     email: "",
     password: "",
@@ -22,14 +22,16 @@ function Login( {handleLogin, handelLoginCheck} ) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    auth.authorizationPost(email, password)
-    .then((data) => {
-        localStorage.setItem('token', data.token)
-        handleLogin(data);
-        navigate('/main')
-    })
-    .catch(() =>  {handelLoginCheck()})
-
+    auth
+      .authorizationPost(email, password)
+      .then((data) => {
+        handleLogin(email);
+        localStorage.setItem("token", data.token);
+        navigate("/main");
+      })
+      .catch(() => {
+        handelLoginCheck();
+      });
   };
 
   return (
@@ -51,6 +53,7 @@ function Login( {handleLogin, handelLoginCheck} ) {
           value={formValue.password}
           type="password"
           name="password"
+          autoComplete="on"
           id="password"
           onChange={handleChange}
         ></input>

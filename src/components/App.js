@@ -9,12 +9,7 @@ import ImagePopup from "./ImagePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import api from "../utils/Api";
 // import PopupDeleteCard from "./PopupDeleteCard";
-import {
-  Routes,
-  Route,
-  Navigate,
-  useNavigate,
-} from "react-router-dom";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Register from "./Register";
 import Login from "./Login";
 import ProtectedRouteElement from "./ProtectedRoute.js";
@@ -67,13 +62,18 @@ function App() {
   //Попап регистрации и логина
   const [isRegistenDone, setIsRegistenDone] = React.useState(false);
   const [isSuccess, setIsSuccess] = React.useState(false);
-  
+
   function handelRegisterCheck() {
     setIsSuccess(true);
     setIsRegistenDone(true);
   }
 
-  function handelLoginCheck(){
+  function handelRegisterFalse() {
+    setIsSuccess(false);
+    setIsRegistenDone(true);
+  }
+
+  function handelLoginCheck() {
     setIsRegistenDone(true);
     setIsSuccess(false);
   }
@@ -165,81 +165,85 @@ function App() {
   const [loggenIn, setLoggenIn] = React.useState(false);
   const [emailData, setemailData] = React.useState('');
 
-    function handleLogin () {
+  function handleLogin(email) {
     setLoggenIn(true);
-  };
+    setemailData(email)
+  }
 
-  function handleExit () {
+  function handleExit() {
     localStorage.removeItem("token");
     setLoggenIn(false);
-    navigate('/login')
+    navigate("/login");
   }
 
   const navigate = useNavigate();
 
   React.useEffect(() => {
     const token = localStorage.getItem("token");
-      auth
-        .checkToken(token)
-        .then((user) => {
-          handleLogin (user)
-          setLoggenIn(user);
-          navigate('/main')
-          setemailData(user.data.email)
-        })
-        .catch();
-  }, [])
-
-
+    auth
+      .checkToken(token)
+      .then((user) => {
+        handleLogin(user);
+        setLoggenIn(user);
+        navigate("/main");
+        setemailData(user.data.email);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <div className="body">
       <div className="page">
         <CurrentUserContext.Provider value={currentUser}>
-          <Header emailData={emailData} handleExit={handleExit}/>
-            <Routes>
-              <Route
-                path="/register"
-                element={<Register handelRegisterCheck={handelRegisterCheck} />}
-              />
+          <Header emailData={emailData} handleExit={handleExit} />
+          <Routes>
+            <Route
+              path="/register"
+              element={
+                <Register
+                  handelRegisterCheck={handelRegisterCheck}
+                  handelRegisterFalse={handelRegisterFalse}
+                />
+              }
+            />
 
-              <Route
-                path="/login"
-                element={
-                  <Login
-                    handleLogin={handleLogin}
-                    handelLoginCheck={handelLoginCheck}
-                  />
-                }
-              />
-              <Route
-                path="/"
-                element={
-                  loggenIn ? (
-                    <Navigate to="/" />
-                  ) : (
-                    <Navigate to="/login" replace />
-                  )
-                }
-              />
+            <Route
+              path="/login"
+              element={
+                <Login
+                  handleLogin={handleLogin}
+                  handelLoginCheck={handelLoginCheck}
+                />
+              }
+            />
+            <Route
+              path="/"
+              element={
+                loggenIn ? (
+                  <Navigate to="/" />
+                ) : (
+                  <Navigate to="/login" replace />
+                )
+              }
+            />
 
-              <Route
-                path="/main"
-                element={
-                  <ProtectedRouteElement
-                    element={Main}
-                    onAddPlace={handleAddPlaceClick}
-                    onEditProfile={handleEditProfileClick}
-                    onEditAvatar={handleEditAvatarClick}
-                    onImage={handleCardClick}
-                    onCardLike={handleCardLike}
-                    cards={cards}
-                    onCardDelete={handleCardDelete}
-                    loggenIn={loggenIn}
-                  />
-                }
-              />
-            </Routes>
+            <Route
+              path="/main"
+              element={
+                <ProtectedRouteElement
+                  element={Main}
+                  onAddPlace={handleAddPlaceClick}
+                  onEditProfile={handleEditProfileClick}
+                  onEditAvatar={handleEditAvatarClick}
+                  onImage={handleCardClick}
+                  onCardLike={handleCardLike}
+                  cards={cards}
+                  onCardDelete={handleCardDelete}
+                  loggenIn={loggenIn}
+                />
+              }
+            />
+          </Routes>
           <Footer />
           <InfoTooltip
             isOpen={isRegistenDone}
