@@ -73,7 +73,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-62/",
+  baseUrl: "https://api.mesto.yandex.students.nomoreparties.sbs",
   headers: {
     "Content-Type": "application/json",
     authorization: "0c87e813-0908-4dae-acb9-98879f391c4e",
