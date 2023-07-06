@@ -14,6 +14,7 @@ class Api {
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
+      credentials: "include",
       method: "GET",
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
@@ -21,6 +22,7 @@ class Api {
 
   addCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
+      credentials: "include",
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({name: data.name, link: data.link}),
@@ -29,6 +31,7 @@ class Api {
 
   getinfoProfil() {
     return fetch(`${this._baseUrl}/users/me`, {
+      credentials: "include",
       method: "GET",
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
@@ -36,6 +39,7 @@ class Api {
 
   patchProfil(data) {
     return fetch(`${this._baseUrl}/users/me`, {
+      credentials: "include",
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({ name: data.name, about: data.about }),
@@ -44,6 +48,7 @@ class Api {
 
   editProfilAvatar(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
+      credentials: "include",
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({ avatar: data.avatar }),
@@ -52,6 +57,7 @@ class Api {
 
   deleteCard(cardID) {
     return fetch(`${this._baseUrl}/cards/${cardID}`, {
+      credentials: "include",
       method: "DELETE",
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
@@ -59,6 +65,7 @@ class Api {
 
   addLike(cardID) {
     return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
+      credentials: "include",
       method: "PUT",
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
@@ -66,6 +73,7 @@ class Api {
 
   deleteLike(cardID) {
     return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
+      credentials: "include",
       method: "DELETE",
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
@@ -74,9 +82,10 @@ class Api {
 
 const api = new Api({
   baseUrl: "https://api.mesto.yandex.students.nomoreparties.sbs",
+  credentials: "include",
   headers: {
     "Content-Type": "application/json",
-    authorization: "0c87e813-0908-4dae-acb9-98879f391c4e",
+    authorization: "",
   },
 });
 

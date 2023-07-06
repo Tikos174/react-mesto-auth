@@ -9,6 +9,7 @@ export function checkResponse(res) {
 
 export function registerPost(email, password) {
   return fetch(`${URL}/signup`, {
+    credentials: "include",
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -20,6 +21,7 @@ export function registerPost(email, password) {
 
 export function authorizationPost(email, password) {
   return fetch(`${URL}/signin`, {
+    credentials: "include",
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -31,6 +33,7 @@ export function authorizationPost(email, password) {
 
 export function checkToken(token) {
   return fetch(`${URL}/users/me`, {
+    credentials: "include",
     method: "GET",
     headers: {
       "Content-Type": "application/json",
