@@ -14,16 +14,16 @@ class Api {
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
-      credentials: "include",
       method: "GET",
+      credentials: "include",
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
   }
 
   addCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
-      credentials: "include",
       method: "POST",
+      credentials: "include",
       headers: this._headers,
       body: JSON.stringify({name: data.name, link: data.link}),
     }).then((res) => this._checkResponse(res));
@@ -31,16 +31,16 @@ class Api {
 
   getinfoProfil() {
     return fetch(`${this._baseUrl}/users/me`, {
-      credentials: "include",
       method: "GET",
+      credentials: "include",
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
   }
 
   patchProfil(data) {
     return fetch(`${this._baseUrl}/users/me`, {
-      credentials: "include",
       method: "PATCH",
+      credentials: "include",
       headers: this._headers,
       body: JSON.stringify({ name: data.name, about: data.about }),
     }).then((res) => this._checkResponse(res));
@@ -48,8 +48,8 @@ class Api {
 
   editProfilAvatar(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
-      credentials: "include",
       method: "PATCH",
+      credentials: "include",
       headers: this._headers,
       body: JSON.stringify({ avatar: data.avatar }),
     }).then((res) => this._checkResponse(res));
@@ -57,35 +57,34 @@ class Api {
 
   deleteCard(cardID) {
     return fetch(`${this._baseUrl}/cards/${cardID}`, {
-      credentials: "include",
       method: "DELETE",
+      credentials: "include",
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
   }
 
   addLike(cardID) {
     return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
-      credentials: "include",
       method: "PUT",
+      credentials: "include",
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
   }
 
   deleteLike(cardID) {
     return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
-      credentials: "include",
       method: "DELETE",
+      credentials: "include",
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
   }
 }
 
 const api = new Api({
-  baseUrl: "https://api.mesto.yandex.students.nomoreparties.sbs",
+  baseUrl: "http://api.mesto.yandex.students.nomoreparties.sbs",
   credentials: "include",
   headers: {
     "Content-Type": "application/json",
-    authorization: "",
   },
 });
 
