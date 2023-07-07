@@ -12,7 +12,7 @@ export function registerPost(email, password) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json",
+      Accept: "application/json",
     },
     body: JSON.stringify({ email, password }),
   }).then((res) => checkResponse(res));
@@ -23,7 +23,7 @@ export function authorizationPost(email, password) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json",
+      Accept: "application/json",
     },
     body: JSON.stringify({ email, password }),
   }).then((res) => checkResponse(res));
@@ -34,8 +34,8 @@ export function checkToken(token) {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "Accept": "application/json",
-      "Authorization": `Bearer ${token}`,
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
     },
   }).then((res) => checkResponse(res));
 }
