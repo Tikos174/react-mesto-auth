@@ -81,7 +81,7 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: 'http://mesto.yandex.students.nomoreparties.sbs',
+  baseUrl: 'https://api.mesto.yandex.students.nomoreparties.sbs',
   credentials: "include",
   headers: {
     "Content-Type": "application/json",
