@@ -15,7 +15,6 @@ class Api {
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       method: "GET",
-      credentials: "include",
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
   }
@@ -23,7 +22,6 @@ class Api {
   addCard(data) {
     return fetch(`${this._baseUrl}/cards`, {
       method: "POST",
-      credentials: "include",
       headers: this._headers,
       body: JSON.stringify({name: data.name, link: data.link}),
     }).then((res) => this._checkResponse(res));
@@ -32,7 +30,6 @@ class Api {
   getinfoProfil() {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "GET",
-      credentials: "include",
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
   }
@@ -40,7 +37,6 @@ class Api {
   patchProfil(data) {
     return fetch(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      credentials: "include",
       headers: this._headers,
       body: JSON.stringify({ name: data.name, about: data.about }),
     }).then((res) => this._checkResponse(res));
@@ -49,7 +45,6 @@ class Api {
   editProfilAvatar(data) {
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      credentials: "include",
       headers: this._headers,
       body: JSON.stringify({ avatar: data.avatar }),
     }).then((res) => this._checkResponse(res));
@@ -58,7 +53,6 @@ class Api {
   deleteCard(cardID) {
     return fetch(`${this._baseUrl}/cards/${cardID}`, {
       method: "DELETE",
-      credentials: "include",
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
   }
@@ -66,7 +60,6 @@ class Api {
   addLike(cardID) {
     return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
       method: "PUT",
-      credentials: "include",
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
   }
@@ -74,7 +67,6 @@ class Api {
   deleteLike(cardID) {
     return fetch(`${this._baseUrl}/cards/${cardID}/likes`, {
       method: "DELETE",
-      credentials: "include",
       headers: this._headers,
     }).then((res) => this._checkResponse(res));
   }
