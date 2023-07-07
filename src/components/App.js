@@ -186,7 +186,7 @@ function App() {
         handleLogin(user);
         setLoggenIn(user);
         navigate("/main");
-        setemailData(user.data.email);
+        setemailData(user.email);
       })
       .catch((err) => console.log(err));
   }, []);

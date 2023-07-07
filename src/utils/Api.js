@@ -81,10 +81,13 @@ class Api {
 }
 
 const api = new Api({
-  baseUrl: "http://api.mesto.yandex.students.nomoreparties.sbs",
+  // baseUrl: "http://api.mesto.yandex.students.nomoreparties.sbs",
+  baseUrl: ["http://localhost:3002", 'http://api.mesto.yandex.students.nomoreparties.sbs', 'http://mesto.yandex.students.nomoreparties.sbs'],
+  credentials: "include",
   headers: {
     "Content-Type": "application/json",
-    "Authorization": `Bearer ${localStorage.getItem('jwt')}`,
+    Authorization: '',
+    // Authorization: `Bearer ${localStorage.getItem('jwt')}`,
   },
 });
 
