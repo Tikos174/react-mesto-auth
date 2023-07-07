@@ -1,4 +1,4 @@
-const URL = "http://api.mesto.yandex.students.nomoreparties.sbs";
+const URL = "http://mesto.yandex.students.nomoreparties.sbs";
 // const URL = "http://localhost:3002";
 
 export function checkResponse(res) {
